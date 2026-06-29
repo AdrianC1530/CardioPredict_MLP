@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardioPredict | Diagnóstico por IA</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob red-blob"></div>
+        <div class="blob blue-blob"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>CardioPredict</h1>
+            <p>Análisis Predictivo de Enfermedad Cardíaca (MLP)</p>
+        </header>
+
+        <main>
+            <div class="form-card">
+                <h2>Datos Clínicos del Paciente</h2>
+                <form id="predict-form">
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="age">Edad</label>
+                            <input type="number" id="age" name="age" required placeholder="Ej: 55">
+                        </div>
+                        <div class="input-group">
+                            <label for="sex">Sexo (1=M, 0=F)</label>
+                            <select id="sex" name="sex" required>
+                                <option value="1">Masculino</option>
+                                <option value="0">Femenino</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="cp">Tipo Dolor Pecho (1-4)</label>
+                            <input type="number" id="cp" name="cp" min="1" max="4" required placeholder="Ej: 3">
+                        </div>
+                        <div class="input-group">
+                            <label for="trestbps">Presión Arterial (reposo)</label>
+                            <input type="number" id="trestbps" name="trestbps" required placeholder="Ej: 130">
+                        </div>
+                        <div class="input-group">
+                            <label for="chol">Colesterol Sérico (mg/dl)</label>
+                            <input type="number" id="chol" name="chol" required placeholder="Ej: 250">
+                        </div>
+                        <div class="input-group">
+                            <label for="fbs">Azúcar en Sangre > 120 (1=Si, 0=No)</label>
+                            <select id="fbs" name="fbs" required>
+                                <option value="0">No</option>
+                                <option value="1">Sí</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="restecg">ECG Reposo (0,1,2)</label>
+                            <input type="number" id="restecg" name="restecg" min="0" max="2" required placeholder="Ej: 1">
+                        </div>
+                        <div class="input-group">
+                            <label for="thalach">Ritmo Cardíaco Máx.</label>
+                            <input type="number" id="thalach" name="thalach" required placeholder="Ej: 150">
+                        </div>
+                        <div class="input-group">
+                            <label for="exang">Angina Inducida (1=Si, 0=No)</label>
+                            <select id="exang" name="exang" required>
+                                <option value="0">No</option>
+                                <option value="1">Sí</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="oldpeak">Depresión ST (Oldpeak)</label>
+                            <input type="number" step="0.1" id="oldpeak" name="oldpeak" required placeholder="Ej: 1.5">
+                        </div>
+                        <div class="input-group">
+                            <label for="slope">Pendiente ST (1,2,3)</label>
+                            <input type="number" id="slope" name="slope" min="1" max="3" required placeholder="Ej: 2">
+                        </div>
+                        <div class="input-group">
+                            <label for="ca">Vasos Principales (0-3)</label>
+                            <input type="number" id="ca" name="ca" min="0" max="3" required placeholder="Ej: 0">
+                        </div>
+                        <div class="input-group">
+                            <label for="thal">Thal (3=Normal, 6=Fijo, 7=Revers.)</label>
+                            <input type="number" id="thal" name="thal" required placeholder="Ej: 3">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="submit-btn">
+                        <span>Analizar Paciente</span>
+                        <div class="loader" id="loader"></div>
+                    </button>
+                </form>
+            </div>
+
+            <div class="result-card hidden" id="result-card">
+                <h3>Resultado del Modelo MLP</h3>
+                <div class="diagnosis" id="diagnosis"></div>
+                <div class="probability-container">
+                    <p>Probabilidad de Enfermedad:</p>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" id="progress-bar"></div>
+                    </div>
+                    <p class="prob-text" id="prob-text">0%</p>
+                </div>
+                <button class="reset-btn" id="reset-btn">Nuevo Análisis</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
